@@ -1,0 +1,6 @@
+{
+  "name": "FitZone",
+  "description": "Gym website clone",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
