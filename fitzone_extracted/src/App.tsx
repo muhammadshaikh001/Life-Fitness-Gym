@@ -96,28 +96,45 @@ function CanvasBackground() {
 }
 
 function Navbar({ onJoinClick }: { onJoinClick: () => void }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
-    <nav className="flex items-center justify-between px-6 lg:px-16 py-6 border-b border-white/5">
-      <div className="flex items-center gap-3">
-        <img src="/logo.jpg" alt="Life Fitness Logo" className="h-16 w-auto object-contain" />
-        <div className="flex flex-col">
-          <span className="font-black text-2xl leading-none tracking-wider">LIFE FITNESS</span>
-          <span className="text-[10px] tracking-[0.2em] text-gray-400 font-bold mt-0.5">STRONGER EVERYDAY</span>
+    <>
+      <nav className="flex items-center justify-between px-6 lg:px-16 py-6 border-b border-white/5 relative z-50">
+        <div className="flex items-center gap-3">
+          <img src="/logo.jpg" alt="Life Fitness Logo" className="h-16 w-auto object-contain relative z-50" />
+          <div className="flex flex-col relative z-50">
+            <span className="font-black text-2xl leading-none tracking-wider">LIFE FITNESS</span>
+            <span className="text-[10px] tracking-[0.2em] text-gray-400 font-bold mt-0.5">STRONGER EVERYDAY</span>
+          </div>
         </div>
-      </div>
-      <div className="hidden lg:flex items-center gap-8 text-xs font-bold tracking-widest">
-        <a href="#home" className="text-white hover:text-yellow-500 transition-colors">HOME</a>
-        <a href="#gallery" className="text-white hover:text-yellow-500 transition-colors">OUR GALLERY</a>
-        <a href="#programs" className="text-white hover:text-yellow-500 transition-colors">CLASSES</a>
-        <a href="#contact" className="text-white hover:text-yellow-500 transition-colors">CONTACT</a>
-      </div>
-      <button onClick={onJoinClick} className="hidden lg:block bg-yellow-500 text-black px-6 py-2.5 font-bold text-sm rounded hover:bg-yellow-400 transition-colors tracking-wide">
-        JOIN NOW
-      </button>
-      <button className="lg:hidden text-white">
-        <Menu className="w-6 h-6" />
-      </button>
-    </nav>
+        <div className="hidden lg:flex items-center gap-8 text-xs font-bold tracking-widest">
+          <a href="#home" className="text-white hover:text-yellow-500 transition-colors">HOME</a>
+          <a href="#gallery" className="text-white hover:text-yellow-500 transition-colors">OUR GALLERY</a>
+          <a href="#programs" className="text-white hover:text-yellow-500 transition-colors">CLASSES</a>
+          <a href="#contact" className="text-white hover:text-yellow-500 transition-colors">CONTACT</a>
+        </div>
+        <button onClick={onJoinClick} className="hidden lg:block bg-yellow-500 text-black px-6 py-2.5 font-bold text-sm rounded hover:bg-yellow-400 transition-colors tracking-wide">
+          JOIN NOW
+        </button>
+        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden text-white p-2 relative z-50">
+          {isMobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+        </button>
+      </nav>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl pt-40 px-6 flex flex-col items-center gap-10 lg:hidden">
+          <a href="#home" onClick={() => setIsMobileMenuOpen(false)} className="text-white text-2xl font-black tracking-widest hover:text-yellow-500 transition-colors">HOME</a>
+          <a href="#gallery" onClick={() => setIsMobileMenuOpen(false)} className="text-white text-2xl font-black tracking-widest hover:text-yellow-500 transition-colors">OUR GALLERY</a>
+          <a href="#programs" onClick={() => setIsMobileMenuOpen(false)} className="text-white text-2xl font-black tracking-widest hover:text-yellow-500 transition-colors">CLASSES</a>
+          <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-white text-2xl font-black tracking-widest hover:text-yellow-500 transition-colors">CONTACT</a>
+          <button onClick={() => { setIsMobileMenuOpen(false); onJoinClick(); }} className="mt-8 bg-yellow-500 text-black px-10 py-4 w-full max-w-sm font-black text-xl rounded hover:bg-yellow-400 transition-colors tracking-widest uppercase shadow-[0_0_20px_rgba(234,179,8,0.3)]">
+            JOIN NOW
+          </button>
+        </div>
+      )}
+    </>
   );
 }
 
