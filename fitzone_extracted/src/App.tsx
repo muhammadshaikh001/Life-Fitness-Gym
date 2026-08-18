@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { 
   Dumbbell, 
   Play, 
@@ -14,7 +14,8 @@ import {
   Mail,
   Clock,
   Menu,
-  Star
+  Star,
+  X
 } from 'lucide-react';
 
 function CanvasBackground() {
@@ -94,7 +95,7 @@ function CanvasBackground() {
   );
 }
 
-function Navbar() {
+function Navbar({ onJoinClick }: { onJoinClick: () => void }) {
   return (
     <nav className="flex items-center justify-between px-6 lg:px-16 py-6 border-b border-white/5">
       <div className="flex items-center gap-3">
@@ -105,12 +106,12 @@ function Navbar() {
         </div>
       </div>
       <div className="hidden lg:flex items-center gap-8 text-xs font-bold tracking-widest">
-        <a href="#" className="text-yellow-500">HOME</a>
-        <a href="#" className="text-white hover:text-yellow-500 transition-colors">GALLERY</a>
-        <a href="#" className="text-white hover:text-yellow-500 transition-colors">CLASSES</a>
-        <a href="#" className="text-white hover:text-yellow-500 transition-colors">CONTACT</a>
+        <a href="#home" className="text-white hover:text-yellow-500 transition-colors">HOME</a>
+        <a href="#gallery" className="text-white hover:text-yellow-500 transition-colors">OUR GALLERY</a>
+        <a href="#programs" className="text-white hover:text-yellow-500 transition-colors">CLASSES</a>
+        <a href="#contact" className="text-white hover:text-yellow-500 transition-colors">CONTACT</a>
       </div>
-      <button className="hidden lg:block bg-yellow-500 text-black px-6 py-2.5 font-bold text-sm rounded hover:bg-yellow-400 transition-colors tracking-wide">
+      <button onClick={onJoinClick} className="hidden lg:block bg-yellow-500 text-black px-6 py-2.5 font-bold text-sm rounded hover:bg-yellow-400 transition-colors tracking-wide">
         JOIN NOW
       </button>
       <button className="lg:hidden text-white">
@@ -120,9 +121,9 @@ function Navbar() {
   );
 }
 
-function Hero() {
+function Hero({ onJoinClick }: { onJoinClick: () => void }) {
   return (
-    <section className="relative px-6 lg:px-16 py-20 lg:py-32 overflow-hidden">
+    <section id="home" className="relative px-6 lg:px-16 py-20 lg:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-2 gap-12">
         <div className="flex flex-col justify-center">
           <h2 className="text-lg lg:text-xl text-gray-200 font-bold uppercase tracking-widest mb-4">
@@ -136,7 +137,7 @@ function Hero() {
             Join a community that pushes you, supports you and helps you become the strongest version of yourself.
           </p>
           <div className="flex flex-wrap items-center gap-6">
-            <button className="bg-yellow-500 text-black px-8 py-3.5 font-bold rounded flex items-center gap-2 hover:bg-yellow-400 transition-colors text-sm tracking-wide">
+            <button onClick={onJoinClick} className="bg-yellow-500 text-black px-8 py-3.5 font-bold rounded flex items-center gap-2 hover:bg-yellow-400 transition-colors text-sm tracking-wide">
               JOIN NOW <ArrowRight className="w-4 h-4" />
             </button>
             <button className="flex items-center gap-3 text-white hover:text-yellow-500 transition-colors font-bold text-sm tracking-wider group">
@@ -188,7 +189,7 @@ function Programs() {
   ];
 
   return (
-    <section className="px-6 lg:px-16 py-24">
+    <section id="programs" className="px-6 lg:px-16 py-24">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-yellow-500 font-bold tracking-widest text-sm uppercase">OUR PROGRAMS</span>
@@ -223,7 +224,7 @@ function Programs() {
 
 function Gallery() {
   return (
-    <section className="px-6 lg:px-16 py-20 bg-transparent">
+    <section id="gallery" className="px-6 lg:px-16 py-20 bg-transparent">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <span className="text-yellow-500 font-bold tracking-widest text-sm uppercase">SEE OUR GYM</span>
@@ -284,7 +285,7 @@ function Footer() {
   ];
 
   return (
-    <footer className="bg-transparent py-16 px-6 lg:px-16 border-t border-white/5">
+    <footer id="contact" className="bg-transparent py-16 px-6 lg:px-16 border-t border-white/5">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-12">
         {footerInfo.map((info, idx) => (
           <div key={idx} className="flex gap-4">
@@ -432,13 +433,69 @@ function WhatsAppButton() {
   );
 }
 
+function JoinModal({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
+  if (!isOpen) return null;
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('name');
+    const phone = formData.get('phone');
+    const address = formData.get('address');
+    const duration = formData.get('duration');
+    
+    const message = `New Gym Membership Inquiry!%0AName: ${name}%0APhone: ${phone}%0AAddress: ${address}%0ADuration: ${duration}`;
+    window.open(`https://wa.me/919157098443?text=${message}`, '_blank');
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm px-4">
+      <div className="bg-[#111] border border-yellow-500/30 rounded-2xl w-full max-w-md p-6 relative">
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+          <X className="w-6 h-6" />
+        </button>
+        <h3 className="text-2xl font-black text-white uppercase tracking-wide mb-6">Join Life Fitness</h3>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div>
+            <label className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-1 block">Full Name</label>
+            <input name="name" required type="text" className="w-full bg-black/50 border border-white/10 rounded px-4 py-2.5 text-white focus:outline-none focus:border-yellow-500 transition-colors" placeholder="Enter your name" />
+          </div>
+          <div>
+            <label className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-1 block">Phone Number</label>
+            <input name="phone" required type="tel" className="w-full bg-black/50 border border-white/10 rounded px-4 py-2.5 text-white focus:outline-none focus:border-yellow-500 transition-colors" placeholder="Enter your number" />
+          </div>
+          <div>
+            <label className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-1 block">Address</label>
+            <textarea name="address" required className="w-full bg-black/50 border border-white/10 rounded px-4 py-2.5 text-white focus:outline-none focus:border-yellow-500 transition-colors resize-none h-20" placeholder="Enter your address"></textarea>
+          </div>
+          <div>
+            <label className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-1 block">Membership Duration</label>
+            <select name="duration" required className="w-full bg-black/50 border border-white/10 rounded px-4 py-2.5 text-white focus:outline-none focus:border-yellow-500 transition-colors [&>option]:bg-[#111]">
+              <option value="1 Month">1 Month</option>
+              <option value="3 Months">3 Months</option>
+              <option value="6 Months">6 Months</option>
+              <option value="1 Year">1 Year</option>
+            </select>
+          </div>
+          <button type="submit" className="w-full bg-yellow-500 text-black py-3 rounded font-bold uppercase tracking-wider hover:bg-yellow-400 transition-colors mt-2">
+            Send Inquiry to WhatsApp
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
+  const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-transparent text-white font-sans selection:bg-yellow-500 selection:text-black relative">
       <CanvasBackground />
       <div className="relative z-10 bg-black/60">
-        <Navbar />
-        <Hero />
+        <Navbar onJoinClick={() => setIsJoinModalOpen(true)} />
+        <Hero onJoinClick={() => setIsJoinModalOpen(true)} />
         <Features />
         <Programs />
         <Gallery />
@@ -448,6 +505,7 @@ export default function App() {
         <Footer />
         <WhatsAppButton />
       </div>
+      <JoinModal isOpen={isJoinModalOpen} onClose={() => setIsJoinModalOpen(false)} />
     </div>
   );
 }
