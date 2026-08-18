@@ -97,12 +97,8 @@ function CanvasBackground() {
 function Navbar() {
   return (
     <nav className="flex items-center justify-between px-6 lg:px-16 py-6 border-b border-white/5">
-      <div className="flex items-center gap-3">
-        <Dumbbell className="text-yellow-500 w-8 h-8" />
-        <div className="flex flex-col">
-          <span className="font-black text-2xl leading-none tracking-wider">LIFE FITNESS</span>
-          <span className="text-[10px] tracking-[0.2em] text-gray-400 font-bold mt-0.5">STRONGER EVERYDAY</span>
-        </div>
+      <div className="flex items-center">
+        <img src="/logo.jpg" alt="Life Fitness Logo" className="h-14 w-auto object-contain" />
       </div>
       <div className="hidden lg:flex items-center gap-8 text-xs font-bold tracking-widest">
         <a href="#" className="text-yellow-500">HOME</a>
