@@ -180,12 +180,51 @@ function Features() {
   );
 }
 
-function Programs() {
-  const programs = [
-    { img: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=500&auto=format&fit=crop', icon: Dumbbell, title: 'STRENGTH TRAINING', desc: 'Build lean muscle and increase overall strength.' },
-    { img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=500&auto=format&fit=crop', icon: Flame, title: 'WEIGHT LOSS', desc: 'Effective fat loss programs for a healthier you.' },
-    { img: 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=500&auto=format&fit=crop', icon: Activity, title: 'FUNCTIONAL TRAINING', desc: 'Improve mobility, endurance and everyday performance.' },
-    { img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&auto=format&fit=crop', icon: Flower2, title: 'YOGA & WELLNESS', desc: 'Balance your body and mind with yoga and stretching.' }
+type ProgramDetails = {
+  img: string;
+  icon: any;
+  title: string;
+  desc: string;
+  longDesc: string;
+  benefits: string[];
+};
+
+function Programs({ onJoinClick }: { onJoinClick: () => void }) {
+  const [selectedProgram, setSelectedProgram] = useState<ProgramDetails | null>(null);
+
+  const programs: ProgramDetails[] = [
+    { 
+      img: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=500&auto=format&fit=crop', 
+      icon: Dumbbell, 
+      title: 'STRENGTH TRAINING', 
+      desc: 'Build lean muscle and increase overall strength.',
+      longDesc: 'Our Strength Training program is designed to help you build lean muscle mass, increase your raw power, and transform your physique. Using a combination of free weights, compound movements, and targeted isolation exercises, our expert coaches will guide you through progressive overload to ensure continuous results.',
+      benefits: ['Increased muscle mass and definition', 'Boosted metabolism for continuous fat burn', 'Stronger bones and joints', 'Expert guidance on lifting form and technique']
+    },
+    { 
+      img: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=500&auto=format&fit=crop', 
+      icon: Flame, 
+      title: 'WEIGHT LOSS', 
+      desc: 'Effective fat loss programs for a healthier you.',
+      longDesc: 'Achieve your dream physique with our scientifically-backed Weight Loss program. We combine high-intensity interval training (HIIT), dynamic cardio, and nutritional guidance to create a sustainable calorie deficit while maintaining muscle mass. Get ready to sweat, burn fat, and feel more energetic than ever.',
+      benefits: ['Rapid and sustainable fat loss', 'Improved cardiovascular health and stamina', 'Personalized diet and nutrition tips', 'High-energy, motivating workout sessions']
+    },
+    { 
+      img: 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=500&auto=format&fit=crop', 
+      icon: Activity, 
+      title: 'FUNCTIONAL TRAINING', 
+      desc: 'Improve mobility, endurance and everyday performance.',
+      longDesc: 'Functional Training prepares your body for real-life activities and sports. By focusing on movements such as pushing, pulling, squatting, and lifting, this program enhances your core stability, balance, and overall agility. It is perfect for anyone looking to move better, pain-free, in their daily life.',
+      benefits: ['Enhanced core strength and stability', 'Better balance, coordination, and agility', 'Injury prevention for daily activities', 'Dynamic workouts that are never boring']
+    },
+    { 
+      img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&auto=format&fit=crop', 
+      icon: Flower2, 
+      title: 'YOGA & WELLNESS', 
+      desc: 'Balance your body and mind with yoga and stretching.',
+      longDesc: 'Find your inner peace and restore your body with our Yoga & Wellness sessions. This program combines various styles of yoga, deep stretching, and breathwork to improve your flexibility, relieve stress, and aid in muscle recovery. It is the perfect complement to intense training or a stressful lifestyle.',
+      benefits: ['Significantly improved flexibility and posture', 'Reduced stress and mental clarity', 'Faster muscle recovery and reduced soreness', 'Better breathing techniques and focus']
+    }
   ];
 
   return (
@@ -204,21 +243,59 @@ function Programs() {
               <div className="h-56 overflow-hidden">
                 <img src={prog.img} alt={prog.title} className="w-full h-full object-cover transition-all duration-500" />
               </div>
-              <div className="p-8">
-                <prog.icon className="w-8 h-8 text-yellow-500 mb-5" strokeWidth={1.5} />
+              <div className="p-8 flex flex-col h-[calc(100%-14rem)]">
+                <prog.icon className="w-8 h-8 text-yellow-500 mb-5 shrink-0" strokeWidth={1.5} />
                 <h3 className="font-bold text-white text-lg mb-3 tracking-wide uppercase">{prog.title}</h3>
-                <p className="text-gray-400 text-sm mb-8 leading-relaxed">
+                <p className="text-gray-400 text-sm mb-8 leading-relaxed flex-grow">
                   {prog.desc}
                 </p>
-                <a href="#" className="text-yellow-500 font-bold text-sm flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-wide">
+                <button onClick={() => setSelectedProgram(prog)} className="text-yellow-500 font-bold text-sm flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-wide">
                   LEARN MORE <ArrowRight className="w-4 h-4" />
-                </a>
+                </button>
               </div>
             </div>
           ))}
         </div>
       </div>
+      <ProgramModal isOpen={!!selectedProgram} onClose={() => setSelectedProgram(null)} program={selectedProgram} onJoinClick={() => { setSelectedProgram(null); onJoinClick(); }} />
     </section>
+  );
+}
+
+function ProgramModal({ isOpen, onClose, program, onJoinClick }: { isOpen: boolean, onClose: () => void, program: ProgramDetails | null, onJoinClick: () => void }) {
+  if (!isOpen || !program) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm px-4">
+      <div className="bg-[#111] border border-yellow-500/30 rounded-2xl w-full max-w-2xl overflow-hidden relative flex flex-col max-h-[90vh]">
+        <button onClick={onClose} className="absolute top-4 right-4 z-10 bg-black/50 p-2 rounded-full text-gray-300 hover:text-white transition-colors backdrop-blur-md">
+          <X className="w-5 h-5" />
+        </button>
+        <div className="h-64 shrink-0 relative">
+          <img src={program.img} alt={program.title} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/40 to-transparent"></div>
+          <div className="absolute bottom-6 left-8 flex items-center gap-4">
+            <program.icon className="w-10 h-10 text-yellow-500" strokeWidth={1.5} />
+            <h3 className="text-3xl font-black text-white uppercase tracking-wide">{program.title}</h3>
+          </div>
+        </div>
+        <div className="p-8 overflow-y-auto">
+          <p className="text-gray-300 leading-relaxed mb-8">{program.longDesc}</p>
+          <h4 className="text-yellow-500 font-bold text-sm uppercase tracking-widest mb-4">Key Benefits</h4>
+          <ul className="grid sm:grid-cols-2 gap-4 mb-8">
+            {program.benefits.map((benefit, idx) => (
+              <li key={idx} className="flex items-start gap-3">
+                <ArrowRight className="w-4 h-4 text-yellow-500 shrink-0 mt-1" />
+                <span className="text-sm text-gray-400 leading-relaxed">{benefit}</span>
+              </li>
+            ))}
+          </ul>
+          <button onClick={onJoinClick} className="w-full bg-yellow-500 text-black py-4 rounded font-bold uppercase tracking-wider hover:bg-yellow-400 transition-colors">
+            JOIN THIS PROGRAM
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -497,7 +574,7 @@ export default function App() {
         <Navbar onJoinClick={() => setIsJoinModalOpen(true)} />
         <Hero onJoinClick={() => setIsJoinModalOpen(true)} />
         <Features />
-        <Programs />
+        <Programs onJoinClick={() => setIsJoinModalOpen(true)} />
         <Gallery />
         <About onJoinClick={() => setIsJoinModalOpen(true)} />
         <Reviews />
