@@ -255,7 +255,7 @@ function Gallery() {
   );
 }
 
-function About() {
+function About({ onJoinClick }: { onJoinClick: () => void }) {
   return (
     <section className="px-6 lg:px-16 py-20 bg-transparent border-t border-white/5">
       <div className="max-w-4xl mx-auto text-center">
@@ -268,7 +268,7 @@ function About() {
           <br/><br/>
           Whether you're taking your very first step or striving for a new personal best, we provide the tools, guidance, and motivation you need to succeed every single day.
         </p>
-        <button className="bg-yellow-500 text-black px-8 py-3.5 font-bold rounded inline-flex items-center gap-2 hover:bg-yellow-400 transition-colors text-sm tracking-wide">
+        <button onClick={onJoinClick} className="bg-yellow-500 text-black px-8 py-3.5 font-bold rounded inline-flex items-center gap-2 hover:bg-yellow-400 transition-colors text-sm tracking-wide">
           JOIN OUR COMMUNITY <ArrowRight className="w-4 h-4" />
         </button>
       </div>
@@ -499,7 +499,7 @@ export default function App() {
         <Features />
         <Programs />
         <Gallery />
-        <About />
+        <About onJoinClick={() => setIsJoinModalOpen(true)} />
         <Reviews />
         <LocationMap />
         <Footer />
