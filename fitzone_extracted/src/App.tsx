@@ -97,8 +97,12 @@ function CanvasBackground() {
 function Navbar() {
   return (
     <nav className="flex items-center justify-between px-6 lg:px-16 py-6 border-b border-white/5">
-      <div className="flex items-center">
-        <img src="/logo.jpg" alt="Life Fitness Logo" className="h-14 w-auto object-contain" />
+      <div className="flex items-center gap-3">
+        <img src="/logo.jpg" alt="Life Fitness Logo" className="h-16 w-auto object-contain" />
+        <div className="flex flex-col">
+          <span className="font-black text-2xl leading-none tracking-wider">LIFE FITNESS</span>
+          <span className="text-[10px] tracking-[0.2em] text-gray-400 font-bold mt-0.5">STRONGER EVERYDAY</span>
+        </div>
       </div>
       <div className="hidden lg:flex items-center gap-8 text-xs font-bold tracking-widest">
         <a href="#" className="text-yellow-500">HOME</a>
@@ -217,41 +221,55 @@ function Programs() {
   );
 }
 
-function About() {
+function Gallery() {
   return (
     <section className="px-6 lg:px-16 py-20 bg-transparent">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-        <div className="relative">
-          <h3 className="text-3xl lg:text-4xl text-center font-black text-white mb-8 uppercase tracking-wide">Our Gallery</h3>
-          <div className="grid grid-cols-2 gap-4 pb-6">
-            <div className="aspect-square rounded-xl overflow-hidden border border-white/5">
-              <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?w=800&auto=format&fit=crop" alt="Gym" className="w-full h-full object-cover transition-all duration-500" />
-            </div>
-            <div className="aspect-square rounded-xl overflow-hidden border border-white/5 translate-y-6">
-              <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&auto=format&fit=crop" alt="Gym Workout" className="w-full h-full object-cover transition-all duration-500" />
-            </div>
-            <div className="aspect-square rounded-xl overflow-hidden border border-white/5">
-              <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop" alt="Gym Equipment" className="w-full h-full object-cover transition-all duration-500" />
-            </div>
-            <div className="aspect-square rounded-xl overflow-hidden border border-white/5 translate-y-6">
-              <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&auto=format&fit=crop" alt="Fitness" className="w-full h-full object-cover transition-all duration-500" />
-            </div>
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <span className="text-yellow-500 font-bold tracking-widest text-sm uppercase">SEE OUR GYM</span>
+          <h3 className="text-4xl lg:text-5xl font-black text-white mt-4 uppercase tracking-wide">Our Gallery</h3>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 pb-6">
+          <div className="aspect-square rounded-xl overflow-hidden border border-white/5">
+            <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?w=800&auto=format&fit=crop" alt="Gym" className="w-full h-full object-cover transition-all duration-500 hover:scale-105" />
+          </div>
+          <div className="aspect-square rounded-xl overflow-hidden border border-white/5">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&auto=format&fit=crop" alt="Gym Workout" className="w-full h-full object-cover transition-all duration-500 hover:scale-105" />
+          </div>
+          <div className="aspect-square rounded-xl overflow-hidden border border-white/5">
+            <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop" alt="Gym Equipment" className="w-full h-full object-cover transition-all duration-500 hover:scale-105" />
+          </div>
+          <div className="aspect-square rounded-xl overflow-hidden border border-white/5">
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&auto=format&fit=crop" alt="Fitness" className="w-full h-full object-cover transition-all duration-500 hover:scale-105" />
+          </div>
+          <div className="aspect-square rounded-xl overflow-hidden border border-white/5">
+            <img src="https://images.unsplash.com/photo-1596357395217-80de13130e92?w=800&auto=format&fit=crop" alt="Gym Weights" className="w-full h-full object-cover transition-all duration-500 hover:scale-105" />
+          </div>
+          <div className="aspect-square rounded-xl overflow-hidden border border-white/5">
+            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&auto=format&fit=crop" alt="Gym People" className="w-full h-full object-cover transition-all duration-500 hover:scale-105" />
           </div>
         </div>
-        <div>
-          <span className="text-yellow-500 font-bold tracking-widest text-sm uppercase">ABOUT US</span>
-          <h2 className="text-4xl lg:text-5xl font-black text-white mt-4 mb-6 uppercase leading-[1.1] tracking-wide">
-            More than a gym,<br/>we are a community.
-          </h2>
-          <p className="text-gray-400 text-base leading-relaxed mb-8 max-w-lg">
-            At Life Fitness, we believe that true transformation starts from within. Our expert coaches and supportive community are dedicated to helping you push past your limits and build a stronger, healthier version of yourself.
-            <br/><br/>
-            Whether you're taking your very first step or striving for a new personal best, we provide the tools, guidance, and motivation you need to succeed every single day.
-          </p>
-          <button className="bg-yellow-500 text-black px-8 py-3.5 font-bold rounded flex items-center gap-2 hover:bg-yellow-400 transition-colors text-sm tracking-wide">
-            JOIN OUR COMMUNITY <ArrowRight className="w-4 h-4" />
-          </button>
-        </div>
+      </div>
+    </section>
+  );
+}
+
+function About() {
+  return (
+    <section className="px-6 lg:px-16 py-20 bg-transparent border-t border-white/5">
+      <div className="max-w-4xl mx-auto text-center">
+        <span className="text-yellow-500 font-bold tracking-widest text-sm uppercase">ABOUT US</span>
+        <h2 className="text-4xl lg:text-5xl font-black text-white mt-4 mb-6 uppercase leading-[1.1] tracking-wide">
+          More than a gym,<br/>we are a community.
+        </h2>
+        <p className="text-gray-400 text-base leading-relaxed mb-8">
+          At Life Fitness, we believe that true transformation starts from within. Our expert coaches and supportive community are dedicated to helping you push past your limits and build a stronger, healthier version of yourself.
+          <br/><br/>
+          Whether you're taking your very first step or striving for a new personal best, we provide the tools, guidance, and motivation you need to succeed every single day.
+        </p>
+        <button className="bg-yellow-500 text-black px-8 py-3.5 font-bold rounded inline-flex items-center gap-2 hover:bg-yellow-400 transition-colors text-sm tracking-wide">
+          JOIN OUR COMMUNITY <ArrowRight className="w-4 h-4" />
+        </button>
       </div>
     </section>
   );
@@ -423,6 +441,7 @@ export default function App() {
         <Hero />
         <Features />
         <Programs />
+        <Gallery />
         <About />
         <Reviews />
         <LocationMap />
