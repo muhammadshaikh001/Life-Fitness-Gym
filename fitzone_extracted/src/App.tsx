@@ -140,12 +140,7 @@ function Hero({ onJoinClick }: { onJoinClick: () => void }) {
             <button onClick={onJoinClick} className="bg-yellow-500 text-black px-8 py-3.5 font-bold rounded flex items-center gap-2 hover:bg-yellow-400 transition-colors text-sm tracking-wide">
               JOIN NOW <ArrowRight className="w-4 h-4" />
             </button>
-            <button className="flex items-center gap-3 text-white hover:text-yellow-500 transition-colors font-bold text-sm tracking-wider group">
-              <div className="w-12 h-12 rounded-full border-2 border-gray-600 flex items-center justify-center group-hover:border-yellow-500 transition-colors">
-                <Play className="w-4 h-4 fill-current ml-1" />
-              </div>
-              WATCH VIDEO
-            </button>
+
           </div>
         </div>
       </div>
