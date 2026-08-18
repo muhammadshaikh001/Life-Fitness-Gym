@@ -201,7 +201,7 @@ function Programs() {
           {programs.map((prog, idx) => (
             <div key={idx} className="bg-[#111] rounded-xl overflow-hidden border border-white/5 group hover:border-yellow-500/30 transition-colors">
               <div className="h-56 overflow-hidden">
-                <img src={prog.img} alt={prog.title} className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />
+                <img src={prog.img} alt={prog.title} className="w-full h-full object-cover transition-all duration-500" />
               </div>
               <div className="p-8">
                 <prog.icon className="w-8 h-8 text-yellow-500 mb-5" strokeWidth={1.5} />
@@ -229,16 +229,16 @@ function About() {
           <h3 className="text-3xl lg:text-4xl text-center font-black text-white mb-8 uppercase tracking-wide">Our Gallery</h3>
           <div className="grid grid-cols-2 gap-4 pb-6">
             <div className="aspect-square rounded-xl overflow-hidden border border-white/5">
-              <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?w=800&auto=format&fit=crop" alt="Gym" className="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 transition-all duration-500" />
+              <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?w=800&auto=format&fit=crop" alt="Gym" className="w-full h-full object-cover transition-all duration-500" />
             </div>
             <div className="aspect-square rounded-xl overflow-hidden border border-white/5 translate-y-6">
-              <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&auto=format&fit=crop" alt="Gym Workout" className="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 transition-all duration-500" />
+              <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&auto=format&fit=crop" alt="Gym Workout" className="w-full h-full object-cover transition-all duration-500" />
             </div>
             <div className="aspect-square rounded-xl overflow-hidden border border-white/5">
-              <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop" alt="Gym Equipment" className="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 transition-all duration-500" />
+              <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop" alt="Gym Equipment" className="w-full h-full object-cover transition-all duration-500" />
             </div>
             <div className="aspect-square rounded-xl overflow-hidden border border-white/5 translate-y-6">
-              <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&auto=format&fit=crop" alt="Fitness" className="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 transition-all duration-500" />
+              <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&auto=format&fit=crop" alt="Fitness" className="w-full h-full object-cover transition-all duration-500" />
             </div>
           </div>
         </div>
